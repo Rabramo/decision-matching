@@ -1,6 +1,5 @@
 
 import streamlit as st
-st.set_page_config(page_title="Decision Matching", layout="wide")
 from pathlib import Path
 raiz = Path(__file__).parent.parent.resolve()
 sys.path.insert(0, str(raiz))
