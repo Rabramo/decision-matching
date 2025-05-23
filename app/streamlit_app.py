@@ -1,13 +1,11 @@
 
 import streamlit as st
 from pathlib import Path
+st.set_page_config(page_title="Decision Matching", layout="wide")
 raiz = Path(__file__).parent.parent.resolve()
 sys.path.insert(0, str(raiz))
 import os
 import sys
-import streamlit as st
-
-
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -17,10 +15,6 @@ from src.artefatos import (
     carregar_matrizes_tfidf,
     carregar_vetorizador
 )
-
-# === Configuração da página ===
-st.set_page_config(page_title="Decision Matching", layout="wide")
-
 # === CSS customizado ===
 st.markdown("""
 <style>
