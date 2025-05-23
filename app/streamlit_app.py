@@ -1,4 +1,3 @@
-!python scripts/precompute.py
 
 import os
 import sys
