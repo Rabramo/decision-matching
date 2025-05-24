@@ -1,11 +1,16 @@
 
+import os
+import sys
 import streamlit as st
 from pathlib import Path
 st.set_page_config(page_title="Decision Matching", layout="wide")
 raiz = Path(__file__).parent.parent.resolve()
 sys.path.insert(0, str(raiz))
+<<<<<<< HEAD
 import os
 import sys
+=======
+>>>>>>> 4a7eda7 (Atualizações)
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
