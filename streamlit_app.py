@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from src.artefatos import (
-    carregar_vagas_parquet,
+    carregar_vagas,
     carregar_candidatos_parquet,
     carregar_matrizes_tfidf,
     carregar_vetorizador
