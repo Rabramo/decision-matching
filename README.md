@@ -11,24 +11,24 @@ Estrutura do Repositório
 decision-matching/
 ├── dados/
 │   ├── brutos/           # JSONs originais (vagas.json, candidatos.json)
-│   └── processados/      # Artefatos pré-computados (Parquet, NPZ, Joblib)
+│   └── processados/      # Artefatos pré-computados (JSON, Parquet, NPZ, Joblib)
+├── scripts/
+│   └── precompute.py     # Gera arquivos processados e artefatos de TF-IDF
+|   └── gera_meta.py      # Extrai e normaliza metadados de vagas e candidatos dos JSON brutos
 ├── src/
 │   ├── ingestao.py       # Carregamento e merge de dados
 │   ├── matching.py       # Pipeline de pré-processamento e ranking
 │   └── artifacts.py      # Funções de leitura de artefatos pré-computados
-├── app/
-│   └── streamlit_app.py  # Front-end interativo em Streamlit
-├── scripts/
-│   └── precompute.py     # Gera arquivos processados e artefatos de TF-IDF
 ├── .gitignore            # Regras de versionamento
 ├── requirements.txt      # Dependências do projeto
-└── README.md             # Documentação geral
+├── README.md             # Documentação geral
+└──  streamlit_app.py     # Front-end interativo em Streamlit
 
 Instalação e Setup
 
 Clonar repositório
 
-git clone git@github.com:SEU_USUARIO/decision-matching.git
+git clone git@github.com:Rabramo/decision-matching.git
 cd decision-matching
 
 Criar ambiente virtual (recomendado)

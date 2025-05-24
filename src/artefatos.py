@@ -43,16 +43,12 @@ def carregar_candidatos() -> pd.DataFrame:
 
 @st.cache_data
 def carregar_vetorizador() -> Any:
-    """
-    Carrega o objeto do TF-IDF Vectorizer (qualquer tipo de objeto).
-    """
+  
     return joblib.load(CAMINHO_VETORIZADOR)
 
 @st.cache_data
 def carregar_matrizes_tfidf() -> Tuple[Any, Any]:
-    """
-    Carrega as matrizes TF-IDF de vagas e candidatos.
-    """
+   
     mat_vagas = sparse.load_npz(CAMINHO_TFIDF_VAGAS)
     mat_candidatos = sparse.load_npz(CAMINHO_TFIDF_CANDIDATOS)
     return mat_vagas, mat_candidatos
