@@ -1,4 +1,4 @@
-#%%
+
 import os
 import sys
 import streamlit as st
@@ -100,7 +100,7 @@ if pagina == "Matching":
     idxs_top = np.argsort(scores)[::-1][:top_n]
     df_top = candidatos.iloc[idxs_top].copy()
     df_top['pontuacao'] = scores[idxs_top]
-#%%
+
     # Extrai nome do candidato (achatar json)
     df_top['nome'] = df_top['infos_basicas.nome'].apply(
         lambda d: d.get('nome', '') if isinstance(d, dict) else ''
@@ -108,7 +108,7 @@ if pagina == "Matching":
 
     # Exibe resultados
     st.markdown(f"<h2 class='stSubheader'>Top {top_n} Candidatos</h2>", unsafe_allow_html=True)
-    df_exibir = df_top[['codigo', 'nome', 'pontuacao']].reset_index(drop=True)
+    df_exibir = df_top[['infos_basicas.codigo_profissional', 'nome', 'pontuacao']].reset_index(drop=True)
     st.dataframe(df_exibir, use_container_width=True)
 
     # Rodapé
