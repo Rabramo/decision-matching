@@ -2,12 +2,13 @@ import os
 import pandas as pd
 import joblib
 import scipy.sparse as sparse
+import json
 
 # Pasta onde os artefatos processados estão armazenados
 dados_processados = os.path.join('dados', 'processados')
 
 # Caminhos para cada artefato
-CAMINHO_VAGAS_META = os.path.join(dados_processados, 'vagas_cleaned.parquet')
+CAMINHO_VAGAS_META = os.path.join(dados_processados, 'vagas_meta.json')
 CAMINHO_CANDIDATOS_PARQUET = os.path.join(dados_processados, 'candidatos_cleaned.parquet')
 CAMINHO_VETORIZADOR = os.path.join(dados_processados, 'tfidf_vectorizer.joblib')
 CAMINHO_TFIDF_VAGAS = os.path.join(dados_processados, 'tfidf_vagas.npz')
@@ -15,8 +16,10 @@ CAMINHO_TFIDF_CANDIDATOS = os.path.join(dados_processados, 'tfidf_candidatos.npz
 
 
 def carregar_vagas():
-    # se for JSON “linha a linha” (cada objeto numa linha):
-    return pd.read_json(CAMINHO_VAGAS_META, lines=True)
+    with open(CAMINHO_VAGAS_META, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    # converte para DataFrame
+    return pd.DataFrame(data)
 
 
 def carregar_candidatos_parquet() -> pd.DataFrame:
