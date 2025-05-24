@@ -11,7 +11,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from src.artefatos import (
     carregar_vagas,
-    carregar_candidatos_parquet,
+    carregar_candidatos,
     carregar_matrizes_tfidf,
     carregar_vetorizador
 )
@@ -37,7 +37,7 @@ html, body, [class*="css"] {
 @st.cache_data
 def carregar_dados():
     vagas = carregar_vagas()
-    candidatos = carregar_candidatos_parquet()
+    candidatos = carregar_candidatos()
     return vagas, candidatos
 
 @st.cache_resource
