@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 from typing import Any, Tuple
-
 import pandas as pd
 import joblib
 import scipy.sparse as sparse
@@ -23,36 +22,31 @@ CAMINHO_TFIDF_CANDIDATOS = PROCESSADOS_DIR / "tfidf_candidatos.npz"
 
 @st.cache_data
 def carregar_vagas() -> pd.DataFrame:
-    raw_path = BRUTOS_DIR / "vagas.json"
-    cache_parquet = PROCESSADOS_DIR / "vagas_cleaned.parquet"
-    if cache_parquet.exists():
-        return pd.read_parquet(cache_parquet)
-    raw = json.load(open(raw_path, "r", encoding="utf-8"))
+    if CAMINHO_VAGAS_PARQ.exists():
+        return pd.read_parquet(CAMINHO_VAGAS_PARQ)
+    with open(CAMINHO_VAGAS_BRUTOS, "r", encoding="utf-8") as f:
+        raw = json.load(f)
     df = pd.json_normalize(list(raw.values()))
-    df.to_parquet(cache_parquet, index=False)
+    df.to_parquet(CAMINHO_VAGAS_PARQ, index=False)
     return df
 
 @st.cache_data
 def carregar_candidatos() -> pd.DataFrame:
-    raw_path = BRUTOS_DIR / "dados/brutos/candidatos.json"
-    # se já existe o Parquet limpo, lê direto
     if CAMINHO_CANDIDATOS_PARQ.exists():
         return pd.read_parquet(CAMINHO_CANDIDATOS_PARQ)
-
-    # caso contrário, carrega o JSON bruto e gera o Parquet
-    with open(raw_path, "r", encoding="utf-8") as f:
+    with open(CAMINHO_CANDIDATOS_BRUTOS, "r", encoding="utf-8") as f:
         raw = json.load(f)
     df = pd.json_normalize(list(raw.values()))
     df.to_parquet(CAMINHO_CANDIDATOS_PARQ, index=False)
     return df
+
 @st.cache_data
 def carregar_vetorizador() -> Any:
-
     return joblib.load(CAMINHO_VETORIZADOR)
 
 @st.cache_data
 def carregar_matrizes_tfidf() -> Tuple[Any, Any]:
+    mat_v = sparse.load_npz(CAMINHO_TFIDF_VAGAS)
+    mat_c = sparse.load_npz(CAMINHO_TFIDF_CANDIDATOS)
+    return mat_v, mat_c
 
-    mat_vagas = sparse.load_npz(CAMINHO_TFIDF_VAGAS)
-    mat_candidatos = sparse.load_npz(CAMINHO_TFIDF_CANDIDATOS)
-    return mat_vagas, mat_candidatos
