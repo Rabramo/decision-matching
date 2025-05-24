@@ -13,7 +13,8 @@ PROCESSADOS = BASE_DIR / "dados" / "processados"
 
 # Caminhos para cada artefato
 CAMINHO_VAGAS_META       = PROCESSADOS / "vagas_meta.json"
-CAMINHO_CANDIDATOS       = PROCESSADOS / "candidatos_meta.json"
+CAMINHO_CANDIDATOS_JSON  = PROCESSADOS / "candidatos_meta.json"
+CAMINHO_CANDIDATOS_PARQ  = PROCESSADOS / "candidatos_cleaned.parquet"
 CAMINHO_VETORIZADOR      = PROCESSADOS / "tfidf_vectorizer.joblib"
 CAMINHO_TFIDF_VAGAS      = PROCESSADOS / "tfidf_vagas.npz"
 CAMINHO_TFIDF_CANDIDATOS = PROCESSADOS / "tfidf_candidatos.npz"
@@ -29,12 +30,16 @@ def carregar_vagas() -> pd.DataFrame:
 
 @st.cache_data
 def carregar_candidatos() -> pd.DataFrame:
-    """
-    Carrega o JSON de candidatos e retorna um DataFrame.
-    """
-    with open(CAMINHO_CANDIDATOS, "r", encoding="utf-8") as f:
+
+    if CAMINHO_CANDIDATOS_PARQ.exists():
+        return pd.read_parquet(CAMINHO_CANDIDATOS_PARQ)
+
+    with open(CAMINHO_CANDIDATOS_JSON, "r", encoding="utf-8") as f:
         data = json.load(f)
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    
+    df.to_parquet(CAMINHO_CANDIDATOS_PARQ)
+    return df
 
 @st.cache_data
 def carregar_vetorizador() -> Any:
