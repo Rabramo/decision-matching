@@ -10,11 +10,11 @@ caminho_json = RAIZ_PROJETO / 'dados' / 'brutos' / 'vagas.json'
 saida_meta   = RAIZ_PROJETO / 'dados' / 'processados' / 'vagas_meta.json'
 
 
-# Carrega o JSON bruto
+
 with open(caminho_json, encoding='utf-8') as f:
     vagas = json.load(f)
 
-# Escolha as chaves que precisa
+
 colunas_meta = [
     'cliente',
     'titulo_vaga',
@@ -24,7 +24,6 @@ colunas_meta = [
     'demais_observacoes'
 ]
 
-# Monta lista de registros
 meta = []
 for vid, v in vagas.items():
     registro = {'id_vaga': vid}
@@ -40,7 +39,7 @@ for vid, v in vagas.items():
     meta.append(registro)
 
 #%%
-# Salva o JSON leve
+
 os.makedirs(os.path.dirname(saida_meta), exist_ok=True)
 with open(saida_meta, 'w', encoding='utf-8') as f:
     json.dump(meta, f, ensure_ascii=False, indent=2)

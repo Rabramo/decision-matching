@@ -32,6 +32,7 @@ html, body, [class*="css"] {
 </style>
 """, unsafe_allow_html=True)
 
+
 # === Carregamento de dados e artefatos ===
 @st.cache_data
 def carregar_dados():

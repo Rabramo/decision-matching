@@ -9,9 +9,7 @@ def carregar_vagas(caminho: str) -> pd.DataFrame:
 
     registros = []
     for vid, vaga in dados.items():
-        # Inicia o registro com o ID da vaga
-        registro = {'id_vaga': vid}
-        # Se o objeto for um dict, “achata” todas as suas chaves
+        registro = {'id_vaga': vid}        
         if isinstance(vaga, dict):
             for chave, valor in vaga.items():
                 registro[chave] = valor
@@ -45,18 +43,15 @@ def merge_vagas_candidatos(
 #%%   SOMENTE TESTES
 # Execução de teste e persistência em Parquet
 def main():
-    # Carrega ambos DataFrames
     vagas = carregar_vagas('dados/brutos/vagas.json')
     candidatos = carregar_candidatos('dados/brutos/candidatos.json')
 
     print(f"Vagas carregadas: {vagas.shape}")
     print(f"Candidatos carregados: {candidatos.shape}")
 
-    # Merge cartesiano e salvamento
     df_merged = merge_vagas_candidatos(vagas, candidatos)
     print(f"Merged shape: {df_merged.shape}")
 
-    # Garante existência de pasta processada
     os.makedirs('dados/processados', exist_ok=True)
     caminho_parquet = 'dados/processados/df_merged.parquet'
     df_merged.to_parquet(caminho_parquet, index=False)

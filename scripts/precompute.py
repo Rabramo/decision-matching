@@ -60,7 +60,6 @@ else:
         raise ValueError(f"Nenhuma coluna de texto encontrada em vagas. Colunas: {vagas_df.columns.tolist()}")
 print(f"Usando '{campo_vaga}' como campo de texto para vagas")
 
-# Detecta coluna de texto em candidatos
 if 'cv_pt' in candidatos_df.columns:
     campo_cv = 'cv_pt'
 else:
@@ -73,7 +72,6 @@ print(f"Usando '{campo_cv}' como campo de texto para candidatos")
 vagas_df['titulo_limpo'] = vagas_df[campo_vaga].fillna('').apply(limpar_texto)
 candidatos_df['cv_limpo'] = candidatos_df[campo_cv].fillna('').apply(limpar_texto)
 
-# 2. Salva DataFrames limpos em Parquet
 vagas_path = DADOS_PROCESSADOS /'vagas_cleaned.parquet'
 vagas_df.to_parquet(vagas_path, index=False)
 print(f"Vagas com texto limpo salvas em: {vagas_path}")
@@ -81,7 +79,6 @@ candidatos_path = DADOS_PROCESSADOS / 'candidatos_cleaned.parquet'
 candidatos_df.to_parquet(candidatos_path, index=False)
 print(f"Candidatos com texto limpo salvos em: {candidatos_path}")
 
-# 3. Vetorização TF-IDF e salvamento de artefatos
 vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
 mat_v = vectorizer.fit_transform(vagas_df['titulo_limpo'])
 mat_c = vectorizer.transform(candidatos_df['cv_limpo'])
