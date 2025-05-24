@@ -1,6 +1,6 @@
-python scripts/precompute.py
+Acesse [Decision Matching](https://decision-matching-sy3nsdifq8pgthy7x3muiy.streamlit.app/)
 
-Decision Matching
+[Decision Matching](https://decision-matching-sy3nsdifq8pgthy7x3muiy.streamlit.app/)
 
 Esta aplicação foi desenvolvida durante Datathon promovido pela FIAP/Alura como trabalho final para o curso de pós-graduação lato sensu, Data Analytics, Pós Tech - 6DTAT.
 
