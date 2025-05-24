@@ -101,10 +101,7 @@ if pagina == "Matching":
     df_top = candidatos.iloc[idxs_top].copy()
     df_top['pontuacao'] = scores[idxs_top]
 
-    # Extrai nome do candidato (achatar json)
-    df_top['nome'] = df_top['infos_basicas.nome'].apply(
-        lambda d: d.get('nome', '') if isinstance(d, dict) else ''
-    )
+    df_top['nome'] = df_top['infos_basicas.nome']
 
     # Exibe resultados
     st.markdown(f"<h2 class='stSubheader'>Top {top_n} Candidatos</h2>", unsafe_allow_html=True)
