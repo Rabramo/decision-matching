@@ -1,16 +1,22 @@
 # Tema inspirado em "Storytelling with Data" de Cole Nussbaumer Knaflic
 [theme]
-base                        = "light"       # força o tema claro
-primaryColor                = "#E8711A"     # laranja vibrante para destaques
-backgroundColor             = "#FFFFFF"     # fundo branco para clareza
-secondaryBackgroundColor    = "#F8F9FA"     # cinza muito claro para blocos de conteúdo
-textColor                   = "#212529"     # texto em cinza-escuro para legibilidade
-font                        = "sans serif"  # fonte simples e limpa
+base                        = "light"
+primaryColor                = "#E8711A"
+backgroundColor             = "#FFFFFF"
+secondaryBackgroundColor    = "#F8F9FA"
+textColor                   = "#212529"
+font                        = "sans serif"
 
-# Ajustes adicionais
 [server]
-enableCORS                  = false         # evita problemas de CORS localmente
-headless                    = false         # mostra o navegador
+# Rodar em modo headless para não tentar abrir janela de browser
+headless                    = true
+# Escutar em todas as interfaces (0.0.0.0) para que o health check funcione
+address                     = "0.0.0.0"
+# Porta padrão do Streamlit (não altere, 8501)
+port                        = 8501
+# CORS tipicamente não é necessário no Cloud
+enableCORS                  = false
 
 [runner]
-magicEnabled                = false         # desativa magic commands do notebook
+# Mantém desativados magic commands de notebook
+magicEnabled                = false
