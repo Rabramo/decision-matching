@@ -2,6 +2,8 @@ python scripts/precompute.py
 
 Decision Matching
 
+Esta aplicação foi desenvolvida durante Datathon promovido pela FIAP/Alura como trabalho final para o curso de pós-graduação lato sensu, Data Analytics, Pós Tech - 6DTAT.
+
 Objetivo
 
 Este projeto tem como objetivo facilitar o processo de recrutamento, automatizando o matching entre vagas disponíveis e currículos de candidatos. Utilizando técnicas de processamento de texto (TF-IDF) e similaridade de cosseno, o sistema gera um ranking dos perfis mais adequados para cada vaga.
@@ -14,11 +16,10 @@ decision-matching/
 │   └── processados/      # Artefatos pré-computados (JSON, Parquet, NPZ, Joblib)
 ├── scripts/
 │   └── precompute.py     # Gera arquivos processados e artefatos de TF-IDF
-|   └── gera_meta.py      # Extrai e normaliza metadados de vagas e candidatos dos JSON brutos
 ├── src/
 │   ├── ingestao.py       # Carregamento e merge de dados
 │   ├── matching.py       # Pipeline de pré-processamento e ranking
-│   └── artifacts.py      # Funções de leitura de artefatos pré-computados
+│   └── artifatos.py      # Funções de leitura de artefatos pré-computados
 ├── .gitignore            # Regras de versionamento
 ├── requirements.txt      # Dependências do projeto
 ├── README.md             # Documentação geral
@@ -34,7 +35,7 @@ cd decision-matching
 Criar ambiente virtual (recomendado)
 
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate (mac)
 
 Instalar dependências
 
@@ -52,8 +53,6 @@ vagas_cleaned.parquet
 
 candidatos_cleaned.parquet
 
-merged_cleaned.parquet
-
 tfidf_vectorizer.joblib
 
 tfidf_vagas.npz
@@ -64,7 +63,7 @@ Executando o Front-end
 
 Use o Streamlit para iniciar a interface interativa:
 
-streamlit run app/streamlit_app.py
+No bash, dê o comando streamlit run app/streamlit_app.py
 
 No navegador, selecione uma vaga, ajuste o número de candidatos (Top N) e visualize o ranking gerado.
 
@@ -91,3 +90,4 @@ Faça commits das suas alterações: git commit -m "Adiciona feature X"
 Envie para a branch remota: git push origin feature-nome
 
 Abra um Pull Request.
+
