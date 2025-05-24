@@ -1,6 +1,7 @@
 # ignorar json por alguns terem tamanho maior que 100MB
 dados/brutos/*.json
 dados/processados/*.parquet
+dados/processados/*.json
 
 # ignorar arquivos de ambiente virtual por segurança    
 env/ 
