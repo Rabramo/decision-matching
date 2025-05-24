@@ -1,6 +1,8 @@
 # ignorar json por alguns terem tamanho maior que 100MB
 dados/brutos/*.json
 dados/processados/*.parquet
+dados/processados/candidatos_meta.json
+dados/processados/vagas_meta.json
 dados/processados/*.json
 
 # ignorar arquivos de ambiente virtual por segurança    
