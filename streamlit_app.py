@@ -1,4 +1,4 @@
-
+#%%
 import os
 import sys
 import streamlit as st
@@ -100,9 +100,9 @@ if pagina == "Matching":
     idxs_top = np.argsort(scores)[::-1][:top_n]
     df_top = candidatos.iloc[idxs_top].copy()
     df_top['pontuacao'] = scores[idxs_top]
-
+#%%
     # Extrai nome do candidato (achatar json)
-    df_top['nome'] = df_top['informacoes_basicas.nome'].apply(
+    df_top['nome'] = df_top['nfos_basicas.nome'].apply(
         lambda d: d.get('nome', '') if isinstance(d, dict) else ''
     )
 
