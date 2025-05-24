@@ -1,0 +1,2 @@
+dados/brutos/*.json filter=lfs diff=lfs merge=lfs -text
+dados/processados/*.parquet filter=lfs diff=lfs merge=lfs -text
