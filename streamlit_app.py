@@ -35,7 +35,7 @@ html, body, [class*="css"] {
 # === Carregamento de dados e artefatos ===
 @st.cache_data
 def carregar_dados():
-    vagas = carregar_vagas_parquet()
+    vagas = carregar_vagas()
     candidatos = carregar_candidatos_parquet()
     return vagas, candidatos
 
