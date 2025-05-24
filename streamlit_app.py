@@ -102,7 +102,7 @@ if pagina == "Matching":
     df_top['pontuacao'] = scores[idxs_top]
 #%%
     # Extrai nome do candidato (achatar json)
-    df_top['nome'] = df_top['nfos_basicas.nome'].apply(
+    df_top['nome'] = df_top['infos_basicas.nome'].apply(
         lambda d: d.get('nome', '') if isinstance(d, dict) else ''
     )
 
