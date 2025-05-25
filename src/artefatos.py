@@ -22,11 +22,14 @@ CAMINHO_TFIDF_CANDIDATOS = PROCESSADOS_DIR / "tfidf_candidatos.npz"
 
 @st.cache_data
 def carregar_vagas() -> pd.DataFrame:
-    if CAMINHO_VAGAS_PARQ.exists():
-        return pd.read_parquet(CAMINHO_VAGAS_PARQ)
     with open(CAMINHO_VAGAS_BRUTOS, "r", encoding="utf-8") as f:
         raw = json.load(f)
-    df = pd.json_normalize(list(raw.values()))
+    records = []
+    for id_vaga, entry in raw.items():
+        info = entry.get("informacoes_basicas", {})
+        info["id_vaga"] = id_vaga
+        records.append(info)
+    df = pd.DataFrame(records)
     df.to_parquet(CAMINHO_VAGAS_PARQ, index=False)
     return df
 
@@ -46,7 +49,6 @@ def carregar_vetorizador() -> Any:
 
 @st.cache_data
 def carregar_matrizes_tfidf() -> Tuple[Any, Any]:
-    mat_v = sparse.load_npz(CAMINHO_TFIDF_VAGAS)
-    mat_c = sparse.load_npz(CAMINHO_TFIDF_CANDIDATOS)
-    return mat_v, mat_c
-
+    mat_vagas = sparse.load_npz(CAMINHO_TFIDF_VAGAS)
+    mat_candidatos = sparse.load_npz(CAMINHO_TFIDF_CANDIDATOS)
+    return mat_vagas, mat_candidatos
