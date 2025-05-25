@@ -1,12 +1,15 @@
-Acesse [Decision Matching](https://decision-matching-sy3nsdifq8pgthy7x3muiy.streamlit.app/)
+Acesse o MVP de [Decision Matching](https://decision-matching-sy3nsdifq8pgthy7x3muiy.streamlit.app/)
+
+Acesse o [video de digulgação](https://youtu.be/I3d99DVugEg)
 
 [Decision Matching](https://decision-matching-sy3nsdifq8pgthy7x3muiy.streamlit.app/)
 
-Esta aplicação foi desenvolvida durante Datathon promovido pela FIAP/Alura como trabalho final para o curso de pós-graduação lato sensu, Data Analytics, Pós Tech - 6DTAT.
+Este MVP (Minimum Viable Product) foi desenvolvido durante Datathon promovido pela FIAP/Alura.
+É o trabalho final para o curso de pós-graduação lato sensu, Data Analytics, Pós Tech - 6DTAT.
 
-Objetivo
+Objetivo do produto proposto
 
-Este projeto tem como objetivo facilitar o processo de recrutamento, automatizando o matching entre vagas disponíveis e currículos de candidatos. Utilizando técnicas de processamento de texto (TF-IDF) e similaridade de cosseno, o sistema gera um ranking dos perfis mais adequados para cada vaga.
+O produto  visa facilitar o processo de recrutamento, automatizando o matching entre vagas disponíveis e currículos de candidatos. Utilizando técnicas de processamento de texto (TF-IDF) e similaridade de cosseno, o sistema gera um ranking dos perfis mais adequados para cada vaga.
 
 Estrutura do Repositório
 

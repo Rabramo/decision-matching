@@ -118,7 +118,7 @@ else:
 Rogério Abramo Alves Pretti  
 """, unsafe_allow_html=True)
     # Exemplo de como incorporar um vídeo (substitua o URL abaixo pelo real)
-    st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    st.video("https://youtu.be/I3d99DVugEg")
 
 
 
