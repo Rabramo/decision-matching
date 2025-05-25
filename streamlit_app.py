@@ -60,7 +60,7 @@ if pagina == "Matching":
     # Seletor de vaga
     def format_vaga(idx):
         v = vagas.iloc[idx]
-        id_vaga = v.get('id_vaga', '')
+        id_vaga = v.get('id_vaga', 'infos_basicas.titulo_vaga')
         titulo_completo = v.get('titulo', '') or v.get('perfil_vaga', {}).get('nome', '')
         return f"{id_vaga} – {titulo_completo}"
 
@@ -76,9 +76,9 @@ if pagina == "Matching":
     # Detalhes da vaga
     vaga = vagas.iloc[vaga_idx]
     st.markdown("<h2 class='stSubheader'>Detalhes da Vaga</h2>", unsafe_allow_html=True)
-    cliente      = vaga.get('informacoes_basicas', {}).get('cliente', '')
-    titulo       = vaga.get('informacoes_basicas', {}).get('titulo_vaga', vaga.get('titulo', ''))
-    tipo         = vaga.get('informacoes_basicas', {}).get('tipo_contratacao', vaga.get('modalidade', ''))
+    cliente      = vaga.get('infos_basicas', {}).get('cliente', '')
+    titulo       = vaga.get('infos_basicas', {}).get('titulo_vaga', vaga.get('titulo', ''))
+    tipo         = vaga.get('infos_basicas', {}).get('tipo_contratacao', vaga.get('modalidade', ''))
     cidade       = vaga.get('perfil_vaga', {}).get('cidade', vaga.get('cidade', ''))
     competencias = vaga.get('perfil_vaga', {}).get('competencia_tecnicas_e_comportamentais', '')
     observacoes  = vaga.get('perfil_vaga', {}).get('demais_observacoes', '')
