@@ -1,5 +1,3 @@
-
-
 import os
 import sys
 import streamlit as st
@@ -61,14 +59,15 @@ if pagina == "Matching":
     # Seletor de vaga
     def format_vaga(idx):
         v = vagas.iloc[idx]
-        codigo = v['id_vaga']
-        titulo = v['informacoes_basicas.titulo_vaga']
+        codigo = v.get('id_vaga', vagas.index[idx])
+        titulo = v.get('titulo_vaga', '')
         return f"{codigo} – {titulo}"
 
     vaga_idx = st.selectbox(
         "Selecione a vaga:",
         options=vagas.index,
         format_func=format_vaga
+
     )
     # Top N candidatos
     top_n = st.slider("Top N candidatos", 1, 20, 5)
@@ -99,13 +98,14 @@ if pagina == "Matching":
     scores = cosine_similarity(vetor_vaga, mat_c)[0]
     idxs_top = np.argsort(scores)[::-1][:top_n]
     df_top = candidatos.iloc[idxs_top].copy()
-    df_top['pontuacao'] = scores[idxs_top]
+    df_top['score'] = scores[idxs_top]
+    df_top['codigo'] = candidatos['infos_basicas.codigo_profissional']
+    df_top['nome'] = candidatos['infos_basicas.nome']
 
-    df_top['nome'] = df_top['infos_basicas.nome']
 
     # Exibe resultados
     st.markdown(f"<h2 class='stSubheader'>Top {top_n} Candidatos</h2>", unsafe_allow_html=True)
-    df_exibir = df_top[['Código', 'Nome', 'Score']].reset_index(drop=True)
+    df_exibir = df_top[['codigo', 'nome', 'score']].reset_index(drop=True)
     st.dataframe(df_exibir, use_container_width=True)
 
     # Rodapé
@@ -142,3 +142,5 @@ Rogério Abramo Alves Pretti
 
 
 
+
+# %%
