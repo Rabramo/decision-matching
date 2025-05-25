@@ -26,6 +26,8 @@ html, body, [class*="css"] {
 .stTitle { font-size: 18px !important; font-weight: bold; color: #3366CC; }
 .stSubheader { font-size: 14px !important; font-weight: bold; color: #3366CC; }
 .stMarkdown { font-size: 14px; line-height: 1.6; }
+.stSelectbox > div div select {width: 150px;}
+.stSlider > div div div {width: 150px;}
 .stButton>button { background-color: #FF7F0E !important; color: white !important; font-size: 16px !important; font-weight: bold !important; border-radius: 8px !important; }
 .main .block-container { max-width: 1400px; }
 </style>
@@ -75,23 +77,15 @@ if pagina == "Matching":
     # Detalhes da vaga
     vaga = vagas.iloc[vaga_idx]
     st.markdown("<h2 class='stSubheader'>Detalhes da Vaga</h2>", unsafe_allow_html=True)
-    cliente      = vaga.get('informacoes_basicas', {}).get('cliente', '')
-    titulo       = vaga.get('informacoes_basicas', {}).get('titulo_vaga', vaga.get('titulo', ''))
-    tipo         = vaga.get('informacoes_basicas', {}).get('tipo_contratacao', vaga.get('modalidade', ''))
-    cidade       = vaga.get('perfil_vaga', {}).get('cidade', vaga.get('cidade', ''))
-    competencias = vaga.get('perfil_vaga', {}).get('competencia_tecnicas_e_comportamentais', '')
-    observacoes  = vaga.get('perfil_vaga', {}).get('demais_observacoes', '')
-
-    st.markdown(f"""
-    <div class='stMarkdown'>
-        <p><strong>Cliente:</strong> {cliente}</p>
-        <p><strong>Título:</strong> {titulo}</p>
-        <p><strong>Tipo de Contratação:</strong> {tipo}</p>
-        <p><strong>Cidade:</strong> {cidade}</p>
-        <p><strong>Competências:</strong> {competencias}</p>
-        <p><strong>Observações:</strong> {observacoes}</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.write("**Cliente:**", vaga.get("informacoes_basicas.cliente", ""))
+    st.write("**Tipo de Contratação:**", vaga.get("informacoes_basicas.tipo_contratacao", ""))
+    st.write("**PCD:**", vaga.get("'perfil_vaga.vaga_especifica_para_pcd',", ""))
+    st.write("**Faixa Etária**", vaga.get("perfil_vaga.cidade", ""))
+    st.write("**Nível Acadêmico**", vaga.get("perfil_vaga.cidade", ""))
+    st.write("**Cidade:**", vaga.get("perfil_vaga.cidade", ""))
+    st.write("**Competências:**", vaga.get("perfil_vaga.competencias", ""))
+    st.write("**Observações:**", vaga.get("perfil_vaga.demais_observacoes", ""))
+  
 
     # Cálculo de similaridade sob demanda
     vetor_vaga = mat_v[vaga_idx]
