@@ -59,11 +59,11 @@ if pagina == "Matching":
     st.markdown("<h1 class='stTitle'>Dashboard de Matching (MVP)</h1>", unsafe_allow_html=True)
 
     # Seletor de vaga
-def format_vaga(idx):
-    v = vagas.iloc[idx]
-    id_vaga = v['id_vaga']
-    titulo_vaga = v.get('informacoes_basicas.titulo_vaga', '')
-    return f"{id_vaga} – {titulo_vaga}"
+    def format_vaga(idx):
+        v = vagas.iloc[idx]
+        id_vaga = v['id_vaga']
+        titulo_vaga = v.get('informacoes_basicas.titulo_vaga', '')
+        return f"{id_vaga} – {titulo_vaga}"
 
     # Dropdown para seleção de vaga
     vaga_idx = st.selectbox(
@@ -112,7 +112,7 @@ def format_vaga(idx):
     # Rodapé
     st.markdown("<div class='stMarkdown'>Powered by Decision Matching</div>", unsafe_allow_html=True)
 
-elif pagina == "Sobre a Pontuação":
+elif pagina == "Sobre o score":
     st.markdown("<h1 class='stTitle'>Como Funciona a Pontuação</h1>", unsafe_allow_html=True)
     st.markdown("""
     <div class='stMarkdown'>
