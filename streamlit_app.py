@@ -61,11 +61,10 @@ if pagina == "Matching":
     # Seletor de vaga
     def format_vaga(idx):
         v = vagas.iloc[idx]
-        id_vaga = v['id_vaga']
-        titulo_vaga = v.get('informacoes_basicas.titulo_vaga', '')
-        return f"{id_vaga} – {titulo_vaga}"
+        codigo = v['id_vaga']
+        titulo = v['informacoes_basicas.titulo_vaga']
+        return f"{codigo} – {titulo}"
 
-    # Dropdown para seleção de vaga
     vaga_idx = st.selectbox(
         "Selecione a vaga:",
         options=vagas.index,
