@@ -1,4 +1,5 @@
 
+
 import os
 import sys
 import streamlit as st
@@ -51,18 +52,18 @@ vetorizador, mat_v, mat_c = carregar_artefatos()
 
 # === Sidebar de navegação ===
 st.sidebar.title("Menu")
-pagina = st.sidebar.radio("", ["Matching", "Sobre a Pontuação", "Video"])
+pagina = st.sidebar.radio("", ["Matching", "Sobre o score", "Video"])
 
 if pagina == "Matching":
     # Título
-    st.markdown("<h1 class='stTitle'>Dashboard de Matching</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='stTitle'>Dashboard de Matching (MVP)</h1>", unsafe_allow_html=True)
 
     # Seletor de vaga
-    def format_vaga(idx):
-        v = vagas.iloc[idx]
-        id_vaga = v.get('id_vaga', 'infos_basicas.titulo_vaga')
-        titulo_completo = v.get('titulo', '') or v.get('perfil_vaga', {}).get('nome', '')
-        return f"{id_vaga} – {titulo_completo}"
+def format_vaga(idx):
+    v = vagas.iloc[idx]
+    id_vaga = v['id_vaga']
+    titulo_vaga = v.get('informacoes_basicas.titulo_vaga', '')
+    return f"{id_vaga} – {titulo_vaga}"
 
     # Dropdown para seleção de vaga
     vaga_idx = st.selectbox(
@@ -76,9 +77,9 @@ if pagina == "Matching":
     # Detalhes da vaga
     vaga = vagas.iloc[vaga_idx]
     st.markdown("<h2 class='stSubheader'>Detalhes da Vaga</h2>", unsafe_allow_html=True)
-    cliente      = vaga.get('infos_basicas', {}).get('cliente', '')
-    titulo       = vaga.get('infos_basicas', {}).get('titulo_vaga', vaga.get('titulo', ''))
-    tipo         = vaga.get('infos_basicas', {}).get('tipo_contratacao', vaga.get('modalidade', ''))
+    cliente      = vaga.get('informacoes_basicas', {}).get('cliente', '')
+    titulo       = vaga.get('informacoes_basicas', {}).get('titulo_vaga', vaga.get('titulo', ''))
+    tipo         = vaga.get('informacoes_basicas', {}).get('tipo_contratacao', vaga.get('modalidade', ''))
     cidade       = vaga.get('perfil_vaga', {}).get('cidade', vaga.get('cidade', ''))
     competencias = vaga.get('perfil_vaga', {}).get('competencia_tecnicas_e_comportamentais', '')
     observacoes  = vaga.get('perfil_vaga', {}).get('demais_observacoes', '')
@@ -105,7 +106,7 @@ if pagina == "Matching":
 
     # Exibe resultados
     st.markdown(f"<h2 class='stSubheader'>Top {top_n} Candidatos</h2>", unsafe_allow_html=True)
-    df_exibir = df_top[['infos_basicas.codigo_profissional', 'nome', 'pontuacao']].reset_index(drop=True)
+    df_exibir = df_top[['Código', 'Nome', 'Score']].reset_index(drop=True)
     st.dataframe(df_exibir, use_container_width=True)
 
     # Rodapé
@@ -115,12 +116,14 @@ elif pagina == "Sobre a Pontuação":
     st.markdown("<h1 class='stTitle'>Como Funciona a Pontuação</h1>", unsafe_allow_html=True)
     st.markdown("""
     <div class='stMarkdown'>
-    - A **pontuação** mede a similaridade entre o texto da vaga e o texto do currículo.<br>
-    - Usamos **TF-IDF** para transformar cada documento em um vetor ponderado.<br>
-    -  Calculamos a **similaridade de cosseno** entre o vetor da vaga selecionada e cada vetor de candidato.<br>
-    - O valor varia de 0 (sem termos em comum) a 1 (textos idênticos).<br>
-    - Os candidatos são ordenados pela pontuação do mais alto para o mais baixo.<br>
-    </div>
+- O **score** traduz o grau de compatibilidade entre o perfil da vaga e o currículo do candidato, capturando semelhanças semânticas de forma quantitativa.<br>
+- Cada documento é convertido em um vetor ponderado com **TF-IDF**, amplificando termos-chave que diferenciam perfis e exigências.<br>
+- Usamos **similaridade de cosseno** para comparar o vetor da vaga selecionada com o de cada candidato, inferindo proximidade e relevância.<br>
+- O score varia de **0** (sem termos relevantes em comum) a **1** (textos quase idênticos), permitindo um ranking claro e confiável.<br>
+- Candidatos são ordenados do maior para o menor score, destacando imediatamente os melhores potenciais “matches”.<br>
+- Este produto é um **MVP** robusto, já inscrito em um concurso de soluções inovadoras de recrutamento, oferecendo rapidez, escalabilidade e precisão num só clique.<br>
+</div>
+
     """, unsafe_allow_html=True)
     st.markdown("<div class='stMarkdown'>Desenvolvido por Rogério Abramo Alves Pretti</div>", unsafe_allow_html=True)
 
@@ -136,3 +139,7 @@ Rogério Abramo Alves Pretti
 """, unsafe_allow_html=True)
     # Exemplo de como incorporar um vídeo (substitua o URL abaixo pelo real)
     st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+
+
+
