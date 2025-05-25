@@ -26,8 +26,7 @@ html, body, [class*="css"] {
 .stTitle { font-size: 18px !important; font-weight: bold; color: #3366CC; }
 .stSubheader { font-size: 14px !important; font-weight: bold; color: #3366CC; }
 .stMarkdown { font-size: 14px; line-height: 1.6; }
-.stSelectbox > div div select {width: 150px;}
-.stSlider > div div div {width: 150px;}
+
 .stButton>button { background-color: #FF7F0E !important; color: white !important; font-size: 16px !important; font-weight: bold !important; border-radius: 8px !important; }
 .main .block-container { max-width: 1400px; }
 </style>
@@ -74,19 +73,7 @@ if pagina == "Matching":
     # Top N candidatos
     top_n = st.slider("Top N candidatos", 1, 20, 5)
 
-    # Detalhes da vaga
-    vaga = vagas.iloc[vaga_idx]
-    st.markdown("<h2 class='stSubheader'>Detalhes da Vaga</h2>", unsafe_allow_html=True)
-    st.write("**Cliente:**", vaga.get("informacoes_basicas.cliente", ""))
-    st.write("**Tipo de Contratação:**", vaga.get("informacoes_basicas.tipo_contratacao", ""))
-    st.write("**PCD:**", vaga.get("'perfil_vaga.vaga_especifica_para_pcd',", ""))
-    st.write("**Faixa Etária**", vaga.get("perfil_vaga.cidade", ""))
-    st.write("**Nível Acadêmico**", vaga.get("perfil_vaga.cidade", ""))
-    st.write("**Cidade:**", vaga.get("perfil_vaga.cidade", ""))
-    st.write("**Competências:**", vaga.get("perfil_vaga.competencias", ""))
-    st.write("**Observações:**", vaga.get("perfil_vaga.demais_observacoes", ""))
-  
-
+   
     # Cálculo de similaridade sob demanda
     vetor_vaga = mat_v[vaga_idx]
     scores = cosine_similarity(vetor_vaga, mat_c)[0]
